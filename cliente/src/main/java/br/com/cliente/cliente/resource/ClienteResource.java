@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteResource {
@@ -18,8 +20,9 @@ public class ClienteResource {
     private ClienteService clienteService;
 
     @PutMapping("/cadastrar")
-    public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteDto clienteDto){
+    public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteDto clienteDto) throws ParseException {
 
-       return ResponseEntity.ok(clienteDto);
+        clienteService.cadastrarCliente(clienteDto);
+        return ResponseEntity.ok(clienteDto);
     }
 }
